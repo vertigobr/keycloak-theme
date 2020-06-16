@@ -1,0 +1,19 @@
+
+version: "3"
+
+services: 
+  keycloak:
+    image: jboss/keycloak:10.0.2
+    volumes:
+      - ./ipaas:/opt/jboss/keycloak/themes/ipaas
+      - ./scripts/fixthemes.sh:/opt/jboss/startup-scripts/fixthemes.sh
+      - keycloakdb:/opt/jboss/keycloak/standalone/data
+    ports:
+      - "8080:8080"
+    environment: 
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_WELCOME_THEME: ipaas
+
+volumes:
+  keycloakdb:
